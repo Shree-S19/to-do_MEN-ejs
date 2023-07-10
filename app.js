@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const itemSchema = import("mongo_utils.js");
 // const mongoClient = require('mongodb').MongoClient;
-
+//fix error in app.post()
 app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({extended:true}))

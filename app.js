@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const itemSchema = import("mongo_utils.js");
 // const mongoClient = require('mongodb').MongoClient;
-//fix error in app.post()
 app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({extended:true}))
@@ -98,6 +97,10 @@ app.get('/:customName',(req,res)=>{
 })
 
 app.post('/',(req,res)=>{
+    let item = req.body.newItem;
+    // items.push(item);
+    // if(item != null){
+    const newItem = new Item({task:item});
     const item = req.body.newItem;
     const listName = req.body.postFrom;
     console.log(listName + typeof(listName));
@@ -106,6 +109,7 @@ app.post('/',(req,res)=>{
     const newItem = new Item({task:item});
 
     if(listName === "Progress"){
+
     newItem.save().then(()=>{
         console.log("new item is inserted....")
         res.redirect('/');
@@ -113,6 +117,8 @@ app.post('/',(req,res)=>{
     .catch((err)=>{
         console.log(err);
     });
+    // console.log(item + " " + typeof(item));
+    if(item === null)res.redirect('/');
     }
     else{
       List.findOne({name:listName})
